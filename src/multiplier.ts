@@ -1,37 +1,35 @@
+import { multiplicator } from "./utils.ts";
+
 interface MultiplyValues {
-	value1: number;
-	value2: number;
+  value1: number;
+  value2: number;
 }
 
 function parseArguments(args: string[]): MultiplyValues {
-	if (args.length < 4) {
-		throw new Error("Not enough arguments");
-	} else if (args.length > 4) {
-		throw new Error("Too many arguments");
-	}
+  if (args.length < 4) {
+    throw new Error("Not enough arguments");
+  } else if (args.length > 4) {
+    throw new Error("Too many arguments");
+  }
 
-	if (!Number.isNaN(Number(args[2])) && !Number.isNaN(Number(args[3]))) {
-		return {
-			value1: Number(args[2]),
-			value2: Number(args[3]),
-		};
-	} else {
-		throw new Error("Provided values were not numbers!");
-	}
-}
-
-function multiplicator(a: number, b: number, printText: string) {
-	console.log(printText, a * b);
+  if (!Number.isNaN(Number(args[2])) && !Number.isNaN(Number(args[3]))) {
+    return {
+      value1: Number(args[2]),
+      value2: Number(args[3]),
+    };
+  } else {
+    throw new Error("Provided values were not numbers!");
+  }
 }
 
 try {
-	const { value1, value2 } = parseArguments(process.argv);
-	multiplicator(
-		value1,
-		value2,
-		`Multiplied ${value1} and ${value2}, the result is:`,
-	);
+  const { value1, value2 } = parseArguments(process.argv);
+  multiplicator(
+    value1,
+    value2,
+    `Multiplied ${value1} and ${value2}, the result is:`,
+  );
 } catch (error) {
-	const errorMessage = error instanceof Error ? error.message : "Unknown";
-	console.error(`Something bad happened. Error: ${errorMessage}`);
+  const errorMessage = error instanceof Error ? error.message : "Unknown";
+  console.error(`Something bad happened. Error: ${errorMessage}`);
 }
